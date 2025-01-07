@@ -37,12 +37,13 @@ def test_network_vpcs_get():
     assert exit_code == 0
     assert jsonout["id"] == network_test_context["vpc_id"]
 
-    # Wait until VPC is not "processing" anymore
-    while jsonout["status"] != "created":
+    # Wait until VPC processing is over (hoping it will be)
+    while jsonout["status"] in ["pending", "processing"]:
         time.sleep(5)
         _, _, _, jsonout = run_cli(
             ["network", "vpcs", "get", network_test_context["vpc_id"]]
         )
+
 
 def test_network_ports_list():
     exit_code, _, _, jsonout = run_cli(["network", "ports", "list"])
