@@ -14,8 +14,12 @@ poetry run pytest
 
 ## Modules tested
 
+Settings:
 - General
+- Config
 - Profile
+- Workspaces
+
+Products:
 - Network
 - Virtual machines
-- Workspaces
