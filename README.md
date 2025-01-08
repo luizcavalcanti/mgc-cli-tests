@@ -11,3 +11,11 @@ funcional tests on Magalu Cloud CLI
 ```bash
 poetry run pytest
 ```
+
+## Modules tested
+
+- General
+- Profile
+- Network
+- Virtual machines
+- Workspaces
