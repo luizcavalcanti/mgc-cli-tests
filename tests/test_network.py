@@ -14,11 +14,6 @@ from utils import run_cli
 network_test_context = {}
 
 
-def test_network_vpcs_list():
-    exit_code, _, _, jsonout = run_cli(["network", "vpcs", "list"])
-    assert exit_code == 0
-
-
 def test_network_vpcs_create():
     exit_code, stdout, stderr, jsonout = run_cli(
         ["network", "vpcs", "create", f"--name=test-{uuid.uuid1()}"]
@@ -43,6 +38,11 @@ def test_network_vpcs_get():
         _, _, _, jsonout = run_cli(
             ["network", "vpcs", "get", network_test_context["vpc_id"]]
         )
+
+def test_network_vpcs_list():
+    exit_code, _, _, jsonout = run_cli(["network", "vpcs", "list"])
+    assert exit_code == 0
+    assert len(jsonout["vpcs"]) > 0
 
 
 def test_network_ports_list():
