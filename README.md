@@ -16,6 +16,7 @@ poetry run pytest
 
 Settings:
 - General
+- Authorization
 - Config
 - Profile
 - Workspaces
