@@ -74,25 +74,17 @@ def test_dbaas_instance_types_get():
     assert "vcpu" in jsonout
 
 
-# def test_dbaas_instances_create():
-#     exit_code, _, _, jsonout = run_cli(
-#         ["dbaas", "instance-types", "get", dbaas_test_context["instance_type_id"]]
-#     )
-#     assert exit_code == 0
-#     assert jsonout["id"] == network_test_context["vpc_id"]
+def test_dbaas_instances_list():
+    exit_code, _, _, jsonout = run_cli(["dbaas", "instances", "list"])
 
-#     # Wait until VPC processing is over (hoping it will be)
-#     while jsonout["status"] in ["pending", "processing"]:
-#         time.sleep(5)
-#         _, _, _, jsonout = run_cli(
-#             ["network", "vpcs", "get", network_test_context["vpc_id"]]
-#         )
+    assert exit_code == 0
+    assert "results" in jsonout
+    assert "meta" in jsonout
 
 
-    
-# instances      Database instances management.
-# create, delete, get, list, resize, snapshots, start, stop, update
-# replicas       Database replicas management.
-# create, delete, get, list, resize, start, stop
-# snapshots      Snapshots management.
-# create
+def test_dbaas_replicas_list():
+    exit_code, _, _, jsonout = run_cli(["dbaas", "replicas", "list"])
+
+    assert exit_code == 0
+    assert "results" in jsonout
+    assert "meta" in jsonout
