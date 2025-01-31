@@ -22,5 +22,7 @@ Settings:
 - Workspaces
 
 Products:
+- Block Storage
+- DBaaS
 - Network
 - Virtual machines
