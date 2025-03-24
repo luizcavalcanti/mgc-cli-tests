@@ -56,7 +56,7 @@ def test_bs_volumes_get():
 
 
 def test_bs_snapshots_create():
-    exit_code, _, _, jsonout = run_cli(
+    exit_code, _, stderr, jsonout = run_cli(
         [
             "bs",
             "snapshots",
@@ -66,7 +66,7 @@ def test_bs_snapshots_create():
             f"--volume.id={block_test_context["volume_id"]}",
         ]
     )
-    assert exit_code == 0
+    assert exit_code == 0, f"Command failed: {stderr}"
     assert "id" in jsonout
 
     block_test_context["snapshot_id"] = jsonout["id"]

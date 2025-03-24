@@ -64,6 +64,25 @@ def test_vm_instances_create():
 
     assert jsonout["status"] == "completed"
 
+def test_vm_instances_create_with_error():
+    exit_code, _, stderr, jsonout = run_cli(
+        [
+            "vm",
+            "instances",
+            "create",
+            "--name=test_vm",
+            "--image.name='cloud-ubuntu-24.04 LTS'",
+            "--machine-type.name=BV1-1-10",
+            f"--ssh-key-name={vm_test_context['key_name']}",
+        ]
+    )
+    assert exit_code != 0
+
+    assert "Error:" in stderr
+    assert "Request ID" in stderr
+    assert "MGC Trace ID" in stderr
+    assert "Status" in stderr
+
 
 def test_vm_instances_list():
     exit_code, _, _, jsonout = run_cli(["vm", "instances", "list"])
