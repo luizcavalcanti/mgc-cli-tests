@@ -24,7 +24,7 @@ def test_config_get_schema():
 
 
 def test_config_set():
-    exit_code, _, stderr, _ = run_cli(["config", "set", "workers", "999"])
+    exit_code, _, stderr, _ = run_cli(["config", "set", "workers", 999])
     assert exit_code == 0, stderr
 
 
