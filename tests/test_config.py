@@ -24,7 +24,10 @@ def test_config_get_schema():
 
 
 def test_config_set():
-    exit_code, _, stderr, _ = run_cli(["config", "set", "workers", 999])
+    exit_code, _, stderr, _ = run_cli(["config", "set", "workers", "999"])
+    assert exit_code == 0, stderr
+
+    exit_code, _, stderr, _ = run_cli(["config", "set", "region", "br-se1"])
     assert exit_code == 0, stderr
 
 
@@ -32,6 +35,10 @@ def test_config_get():
     exit_code, _, stderr, jsonout = run_cli(["config", "get", "workers"])
     assert exit_code == 0, stderr
     assert jsonout == 999
+
+    exit_code, _, stderr, jsonout = run_cli(["config", "get", "region"])
+    assert exit_code == 0, stderr
+    assert jsonout == "br-se1"
 
 
 def test_config_delete():
