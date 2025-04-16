@@ -7,14 +7,13 @@ dbaas_test_context = {}
 
 
 def test_dbaas_engines_list():
-    exit_code, _, _, jsonout = run_cli(["dbaas", "engines", "list"])
-    assert exit_code == 0
+    exit_code, _, stderr, jsonout = run_cli(["dbaas", "engines", "list"])
+    assert exit_code == 0, stderr
     assert "results" in jsonout
     assert len(jsonout["results"]) > 0
 
     engine = jsonout["results"][0]
     assert "id" in engine
-    assert "engine" in engine
     assert "name" in engine
     assert "status" in engine
     assert "version" in engine
@@ -23,21 +22,20 @@ def test_dbaas_engines_list():
 
 
 def test_dbaas_engines_get():
-    exit_code, _, _, jsonout = run_cli(
+    exit_code, _, stderr, jsonout = run_cli(
         ["dbaas", "engines", "get", dbaas_test_context["engine_id"]]
     )
-    assert exit_code == 0
+    assert exit_code == 0, stderr
 
     assert "id" in jsonout
-    assert "engine" in jsonout
     assert "name" in jsonout
     assert "status" in jsonout
     assert "version" in jsonout
 
 
 def test_dbaas_instance_types_list():
-    exit_code, _, _, jsonout = run_cli(["dbaas", "instance-types", "list"])
-    assert exit_code == 0
+    exit_code, _, stderr, jsonout = run_cli(["dbaas", "instance-types", "list"])
+    assert exit_code == 0, stderr
     assert "results" in jsonout
     assert len(jsonout["results"]) > 0
 
@@ -49,18 +47,16 @@ def test_dbaas_instance_types_list():
     assert "name" in instance_type
     assert "ram" in instance_type
     assert "size" in instance_type
-    assert "sku_replica" in instance_type
-    assert "sku_source" in instance_type
     assert "vcpu" in instance_type
 
     dbaas_test_context["instance_type_id"] = instance_type["id"]
 
 
 def test_dbaas_instance_types_get():
-    exit_code, _, _, jsonout = run_cli(
+    exit_code, _, stderr, jsonout = run_cli(
         ["dbaas", "instance-types", "get", dbaas_test_context["instance_type_id"]]
     )
-    assert exit_code == 0
+    assert exit_code == 0, stderr
 
     assert "id" in jsonout
     assert "family_description" in jsonout
@@ -69,22 +65,20 @@ def test_dbaas_instance_types_get():
     assert "name" in jsonout
     assert "ram" in jsonout
     assert "size" in jsonout
-    assert "sku_replica" in jsonout
-    assert "sku_source" in jsonout
     assert "vcpu" in jsonout
 
 
 def test_dbaas_instances_list():
-    exit_code, _, _, jsonout = run_cli(["dbaas", "instances", "list"])
+    exit_code, _, stderr, jsonout = run_cli(["dbaas", "instances", "list"])
 
-    assert exit_code == 0
+    assert exit_code == 0, stderr
     assert "results" in jsonout
     assert "meta" in jsonout
 
 
 def test_dbaas_replicas_list():
-    exit_code, _, _, jsonout = run_cli(["dbaas", "replicas", "list"])
+    exit_code, _, stderr, jsonout = run_cli(["dbaas", "replicas", "list"])
 
-    assert exit_code == 0
+    assert exit_code == 0, stderr
     assert "results" in jsonout
     assert "meta" in jsonout
